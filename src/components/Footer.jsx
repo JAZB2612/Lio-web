@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Landmark } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Contact } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md-grid grid-cols-4 gap-8 mb-12">
                     <div className="col-span-1 md-grid col-span-1">
                         <div className="flex items-center gap-2 mb-6">
-                            <Landmark className="text-primary" size={32} />
+                            <Contact className="text-primary" size={32} />
                             <span className="text-2xl font-bold serif text-white">LIO</span>
                         </div>
                         <p className="text-sm opacity-60 mb-6">

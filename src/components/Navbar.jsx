@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Landmark } from 'lucide-react';
+import { Menu, X, Contact } from 'lucide-react';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -24,7 +24,7 @@ const Navbar = () => {
         <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass py-3' : 'py-5'}`}>
             <div className="container flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                    <Landmark className="h-8 w-8 text-primary" />
+                    <Contact className="h-8 w-8 text-primary" />
                     <span className="text-2xl font-bold serif text-secondary">LIO</span>
                 </div>
 
