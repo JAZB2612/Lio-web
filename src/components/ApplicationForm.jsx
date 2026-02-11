@@ -19,9 +19,23 @@ const ApplicationForm = () => {
         vigencia: '1 year',
     });
 
+    const [capturedFiles, setCapturedFiles] = useState({
+        fotoCarnet: null,
+        fotoFirma: null,
+        fotoID: null,
+        fotoLicencia: null,
+    });
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleFileChange = (e) => {
+        const { name, files } = e.target;
+        if (files && files[0]) {
+            setCapturedFiles(prev => ({ ...prev, [name]: files[0] }));
+        }
     };
 
     const nextStep = () => setStep(prev => Math.min(prev + 1, totalSteps));
@@ -40,12 +54,10 @@ const ApplicationForm = () => {
                 formData.colorOjos && formData.colorOjos.trim() !== '';
         }
         if (step === 3) {
-            const form = document.querySelector('form[name="tramite-licencia"]');
-            if (!form) return false;
-            return form.fotoCarnet.files.length > 0 &&
-                form.fotoFirma.files.length > 0 &&
-                form.fotoID.files.length > 0 &&
-                form.fotoLicencia.files.length > 0;
+            return capturedFiles.fotoCarnet &&
+                capturedFiles.fotoFirma &&
+                capturedFiles.fotoID &&
+                capturedFiles.fotoLicencia;
         }
         if (step === 4) {
             return formData.email && formData.email.trim() !== '' &&
@@ -76,6 +88,13 @@ const ApplicationForm = () => {
         Object.keys(formData).forEach(key => {
             if (!formDataObj.has(key)) {
                 formDataObj.append(key, formData[key]);
+            }
+        });
+
+        // Adjuntamos las fotos desde el estado (porque el DOM del paso 3 ya no existe)
+        Object.keys(capturedFiles).forEach(key => {
+            if (capturedFiles[key]) {
+                formDataObj.set(key, capturedFiles[key]);
             }
         });
 
@@ -220,19 +239,19 @@ const ApplicationForm = () => {
                                     <div className="grid grid-cols-1 md-grid grid-cols-2 gap-4">
                                         <div className="form-group">
                                             <label>Foto Tipo Carnet</label>
-                                            <input type="file" name="fotoCarnet" accept="image/*" required />
+                                            <input type="file" name="fotoCarnet" accept="image/*" onChange={handleFileChange} required />
                                         </div>
                                         <div className="form-group">
                                             <label>Foto de la Firma</label>
-                                            <input type="file" name="fotoFirma" accept="image/*" required />
+                                            <input type="file" name="fotoFirma" accept="image/*" onChange={handleFileChange} required />
                                         </div>
                                         <div className="form-group">
                                             <label>Pasaporte / Cédula</label>
-                                            <input type="file" name="fotoID" accept="image/*" required />
+                                            <input type="file" name="fotoID" accept="image/*" onChange={handleFileChange} required />
                                         </div>
                                         <div className="form-group">
                                             <label>Licencia de Conducir Local</label>
-                                            <input type="file" name="fotoLicencia" accept="image/*" required />
+                                            <input type="file" name="fotoLicencia" accept="image/*" onChange={handleFileChange} required />
                                         </div>
                                     </div>
                                 </motion.div>
