@@ -15,6 +15,7 @@ const ApplicationForm = () => {
         colorOjos: '',
         email: '',
         telefono: '',
+        fechaNacimiento: '',
         vigencia: '1 year',
     });
 
@@ -30,6 +31,7 @@ const ApplicationForm = () => {
         if (step === 1) {
             return formData.nombreCompleto && formData.nombreCompleto.trim() !== '' &&
                 formData.paisNacimiento && formData.paisNacimiento.trim() !== '' &&
+                formData.fechaNacimiento && formData.fechaNacimiento !== '' &&
                 formData.paisResidencia && formData.paisResidencia.trim() !== '';
         }
         if (step === 2) {
@@ -147,9 +149,13 @@ const ApplicationForm = () => {
                                             <input type="text" name="paisNacimiento" value={formData.paisNacimiento} onChange={handleChange} placeholder="Ej. Colombia" required />
                                         </div>
                                         <div className="form-group">
-                                            <label>País de Residencia</label>
-                                            <input type="text" name="paisResidencia" value={formData.paisResidencia} onChange={handleChange} placeholder="Ej. España" required />
+                                            <label>Fecha de Nacimiento</label>
+                                            <input type="date" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} required />
                                         </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>País de Residencia</label>
+                                        <input type="text" name="paisResidencia" value={formData.paisResidencia} onChange={handleChange} placeholder="Ej. España" required />
                                     </div>
                                     <div className="form-group">
                                         <label>Vigencia Deseada</label>
