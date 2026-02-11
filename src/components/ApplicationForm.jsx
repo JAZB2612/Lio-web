@@ -50,23 +50,29 @@ const ApplicationForm = () => {
                 <div className="card">
                     <form
                         name="tramite-licencia"
-                        method="POST"
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            const myForm = e.target;
+                            const formDataObj = new FormData(myForm);
+
+                            // Añadimos manualmente los campos de pasados pasos que puedan estar desmontados
+                            Object.keys(formData).forEach(key => {
+                                if (!formDataObj.has(key)) {
+                                    formDataObj.append(key, formData[key]);
+                                }
+                            });
+
+                            fetch("/", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                                body: new URLSearchParams(formDataObj).toString(),
+                            })
+                                .then(() => window.location.href = "/success.html")
+                                .catch((error) => alert(error));
+                        }}
                         data-netlify="true"
-                        action="/success.html"
-                        encType="multipart/form-data"
                     >
                         <input type="hidden" name="form-name" value="tramite-licencia" />
-
-                        {/* Hidden inputs to ensure Netlify captures data from all steps */}
-                        <input type="hidden" name="nombreCompleto" value={formData.nombreCompleto} />
-                        <input type="hidden" name="paisNacimiento" value={formData.paisNacimiento} />
-                        <input type="hidden" name="paisResidencia" value={formData.paisResidencia} />
-                        <input type="hidden" name="vigencia" value={formData.vigencia} />
-                        <input type="hidden" name="estatura" value={formData.estatura} />
-                        <input type="hidden" name="tipoSangre" value={formData.tipoSangre} />
-                        <input type="hidden" name="colorOjos" value={formData.colorOjos} />
-                        <input type="hidden" name="email" value={formData.email} />
-                        <input type="hidden" name="telefono" value={formData.telefono} />
 
                         <AnimatePresence mode="wait">
                             {step === 1 && (
@@ -81,21 +87,21 @@ const ApplicationForm = () => {
                                     </h3>
                                     <div className="form-group">
                                         <label>Nombre Completo (como aparece en su licencia)</label>
-                                        <input type="text" onChange={handleChange} value={formData.nombreCompleto} name="nombreCompleto_display" placeholder="Ej. Juan Pérez" required />
+                                        <input type="text" name="nombreCompleto" value={formData.nombreCompleto} onChange={handleChange} placeholder="Ej. Juan Pérez" required />
                                     </div>
                                     <div className="grid grid-cols-1 md-grid grid-cols-2 gap-4">
                                         <div className="form-group">
                                             <label>País de Nacimiento</label>
-                                            <input type="text" onChange={handleChange} value={formData.paisNacimiento} name="paisNacimiento_display" placeholder="Ej. Colombia" required />
+                                            <input type="text" name="paisNacimiento" value={formData.paisNacimiento} onChange={handleChange} placeholder="Ej. Colombia" required />
                                         </div>
                                         <div className="form-group">
                                             <label>País de Residencia</label>
-                                            <input type="text" onChange={handleChange} value={formData.paisResidencia} name="paisResidencia_display" placeholder="Ej. España" required />
+                                            <input type="text" name="paisResidencia" value={formData.paisResidencia} onChange={handleChange} placeholder="Ej. España" required />
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <label>Vigencia Deseada</label>
-                                        <select onChange={handleChange} value={formData.vigencia} name="vigencia_display">
+                                        <select name="vigencia" value={formData.vigencia} onChange={handleChange}>
                                             <option value="1 year">1 Año - $70 USD</option>
                                             <option value="2 years">2 Años - $100 USD</option>
                                             <option value="5 years">5 Años - $150 USD</option>
@@ -117,11 +123,11 @@ const ApplicationForm = () => {
                                     <div className="grid grid-cols-2 md-grid grid-cols-3 gap-4">
                                         <div className="form-group">
                                             <label>Estatura (cm)</label>
-                                            <input type="text" onChange={handleChange} value={formData.estatura} name="estatura_display" placeholder="Ej. 175" required />
+                                            <input type="text" name="estatura" value={formData.estatura} onChange={handleChange} placeholder="Ej. 175" required />
                                         </div>
                                         <div className="form-group">
                                             <label>Tipo de Sangre</label>
-                                            <select onChange={handleChange} value={formData.tipoSangre} name="tipoSangre_display" required>
+                                            <select name="tipoSangre" value={formData.tipoSangre} onChange={handleChange} required>
                                                 <option value="">Seleccione</option>
                                                 <option value="O+">O+</option>
                                                 <option value="O-">O-</option>
@@ -135,7 +141,7 @@ const ApplicationForm = () => {
                                         </div>
                                         <div className="form-group">
                                             <label>Color de Ojos</label>
-                                            <input type="text" onChange={handleChange} value={formData.colorOjos} name="colorOjos_display" placeholder="Ej. Café" required />
+                                            <input type="text" name="colorOjos" value={formData.colorOjos} onChange={handleChange} placeholder="Ej. Café" required />
                                         </div>
                                     </div>
                                 </motion.div>
@@ -186,11 +192,11 @@ const ApplicationForm = () => {
                                     </h3>
                                     <div className="form-group">
                                         <label>Correo Electrónico</label>
-                                        <input type="email" onChange={handleChange} value={formData.email} name="email_display" placeholder="correo@ejemplo.com" required />
+                                        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="correo@ejemplo.com" required />
                                     </div>
                                     <div className="form-group">
                                         <label>Número de Teléfono (con código de área)</label>
-                                        <input type="tel" onChange={handleChange} value={formData.telefono} name="telefono_display" placeholder="+51 999 999 999" required />
+                                        <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="+51 999 999 999" required />
                                     </div>
 
                                     <div className="bg-bg-subtle p-4 rounded-lg mt-6">
