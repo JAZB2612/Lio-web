@@ -26,6 +26,77 @@ const ApplicationForm = () => {
     const nextStep = () => setStep(prev => Math.min(prev + 1, totalSteps));
     const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
 
+    const validateStep = () => {
+        if (step === 1) {
+            return formData.nombreCompleto && formData.nombreCompleto.trim() !== '' &&
+                formData.paisNacimiento && formData.paisNacimiento.trim() !== '' &&
+                formData.paisResidencia && formData.paisResidencia.trim() !== '';
+        }
+        if (step === 2) {
+            return formData.estatura && formData.estatura.trim() !== '' &&
+                formData.tipoSangre && formData.tipoSangre !== '' &&
+                formData.colorOjos && formData.colorOjos.trim() !== '';
+        }
+        if (step === 3) {
+            const form = document.querySelector('form[name="tramite-licencia"]');
+            if (!form) return false;
+            return form.fotoCarnet.files.length > 0 &&
+                form.fotoFirma.files.length > 0 &&
+                form.fotoID.files.length > 0 &&
+                form.fotoLicencia.files.length > 0;
+        }
+        if (step === 4) {
+            return formData.email && formData.email.trim() !== '' &&
+                formData.telefono && formData.telefono.trim() !== '';
+        }
+        return true;
+    };
+
+    const handleNext = () => {
+        if (validateStep()) {
+            nextStep();
+        } else {
+            alert('Por favor, rellene todos los campos obligatorios de este paso antes de continuar.');
+        }
+    };
+
+    const handleSubmit = (e) => {
+        if (e) e.preventDefault();
+
+        if (!validateStep()) {
+            alert('Por favor, complete su Correo y Teléfono antes de enviar la solicitud.');
+            return;
+        }
+
+        const myForm = document.querySelector('form[name="tramite-licencia"]');
+        const formDataObj = new FormData(myForm);
+
+        Object.keys(formData).forEach(key => {
+            if (!formDataObj.has(key)) {
+                formDataObj.append(key, formData[key]);
+            }
+        });
+
+        const btn = document.getElementById('submit-btn');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerText = "Enviando...";
+        }
+
+        fetch("/", {
+            method: "POST",
+            body: formDataObj,
+        })
+            .then(() => window.location.href = "/success.html")
+            .catch((error) => {
+                alert("Error al enviar: " + error);
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerText = "Enviar Solicitud";
+                }
+            });
+    };
+
     return (
         <section id="tramite" className="bg-bg-subtle">
             <div className="container" style={{ maxWidth: '800px' }}>
@@ -50,37 +121,12 @@ const ApplicationForm = () => {
                 <div className="card">
                     <form
                         name="tramite-licencia"
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            const myForm = e.target;
-                            const formDataObj = new FormData(myForm);
-
-                            // Aseguramos que los datos de pasos anteriores (que estén en el estado) se incluyan
-                            // si no están presentes en el DOM del formulario actual
-                            Object.keys(formData).forEach(key => {
-                                if (!formDataObj.has(key)) {
-                                    formDataObj.append(key, formData[key]);
-                                }
-                            });
-
-                            fetch("/", {
-                                method: "POST",
-                                body: formDataObj,
-                            })
-                                .then(() => window.location.href = "/success.html")
-                                .catch((error) => alert("Error al enviar: " + error));
-                        }}
-                        onKeyDown={(e) => {
-                            // Evitar que el formulario se envíe al presionar Enter en los inputs
-                            if (e.key === 'Enter') {
-                                e.preventDefault();
-                            }
-                        }}
                         data-netlify="true"
                     >
                         <input type="hidden" name="form-name" value="tramite-licencia" />
 
                         <AnimatePresence mode="wait">
+                            {/* ... Content of step 1 and 2 remains same, only buttons change below ... */}
                             {step === 1 && (
                                 <motion.div
                                     key="step1"
@@ -163,24 +209,24 @@ const ApplicationForm = () => {
                                     <h3 className="mb-6 flex items-center gap-2">
                                         <Camera className="text-primary" /> Documentación (Fotos)
                                     </h3>
-                                    <p className="text-xs text-muted mb-4">Asegúrese de que las fotos sean legibles y estén bien iluminadas. Formatos permitidos: JPG, PNG.</p>
+                                    <p className="text-xs text-muted mb-4">Obligatorio: Suba las 4 fotos requeridas para poder continuar.</p>
 
                                     <div className="grid grid-cols-1 md-grid grid-cols-2 gap-4">
                                         <div className="form-group">
                                             <label>Foto Tipo Carnet</label>
-                                            <input type="file" name="fotoCarnet" accept="image/*" />
+                                            <input type="file" name="fotoCarnet" accept="image/*" required />
                                         </div>
                                         <div className="form-group">
                                             <label>Foto de la Firma</label>
-                                            <input type="file" name="fotoFirma" accept="image/*" />
+                                            <input type="file" name="fotoFirma" accept="image/*" required />
                                         </div>
                                         <div className="form-group">
                                             <label>Pasaporte / Cédula</label>
-                                            <input type="file" name="fotoID" accept="image/*" />
+                                            <input type="file" name="fotoID" accept="image/*" required />
                                         </div>
                                         <div className="form-group">
                                             <label>Licencia de Conducir Local</label>
-                                            <input type="file" name="fotoLicencia" accept="image/*" />
+                                            <input type="file" name="fotoLicencia" accept="image/*" required />
                                         </div>
                                     </div>
                                 </motion.div>
@@ -224,11 +270,17 @@ const ApplicationForm = () => {
                             )}
 
                             {step < totalSteps ? (
-                                <button type="button" onClick={nextStep} className="btn btn-primary flex items-center gap-2">
+                                <button type="button" onClick={handleNext} className="btn btn-primary flex items-center gap-2">
                                     Siguiente <ChevronRight size={20} />
                                 </button>
                             ) : (
-                                <button type="submit" className="btn btn-primary flex items-center gap-2" style={{ background: 'var(--secondary)' }}>
+                                <button
+                                    type="button"
+                                    id="submit-btn"
+                                    onClick={handleSubmit}
+                                    className="btn btn-primary flex items-center gap-2"
+                                    style={{ background: 'var(--secondary)' }}
+                                >
                                     Enviar Solicitud <Send size={20} />
                                 </button>
                             )}
