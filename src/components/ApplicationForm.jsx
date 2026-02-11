@@ -82,35 +82,41 @@ const ApplicationForm = () => {
             return;
         }
 
-        const myForm = document.querySelector('form[name="tramite-licencia"]');
-        const formDataObj = new FormData(myForm);
-
-        Object.keys(formData).forEach(key => {
-            if (!formDataObj.has(key)) {
-                formDataObj.append(key, formData[key]);
-            }
-        });
-
-        // Adjuntamos las fotos desde el estado (porque el DOM del paso 3 ya no existe)
-        Object.keys(capturedFiles).forEach(key => {
-            if (capturedFiles[key]) {
-                formDataObj.set(key, capturedFiles[key]);
-            }
-        });
-
         const btn = document.getElementById('submit-btn');
         if (btn) {
             btn.disabled = true;
             btn.innerText = "Enviando...";
         }
 
+        // Construimos el FormData manualmente para asegurar que todo esté incluido
+        const formDataObj = new FormData();
+        formDataObj.append('form-name', 'tramite-licencia');
+
+        // Datos de texto
+        Object.keys(formData).forEach(key => {
+            formDataObj.append(key, formData[key]);
+        });
+
+        // Archivos desde el estado
+        Object.keys(capturedFiles).forEach(key => {
+            if (capturedFiles[key]) {
+                formDataObj.append(key, capturedFiles[key]);
+            }
+        });
+
         fetch("/", {
             method: "POST",
             body: formDataObj,
         })
-            .then(() => window.location.href = "/success.html")
+            .then((response) => {
+                if (response.ok) {
+                    window.location.href = "/success.html";
+                } else {
+                    throw new Error("Respuesta del servidor no válida");
+                }
+            })
             .catch((error) => {
-                alert("Error al enviar: " + error);
+                alert("Error al enviar: " + error.message);
                 if (btn) {
                     btn.disabled = false;
                     btn.innerText = "Enviar Solicitud";
@@ -142,10 +148,7 @@ const ApplicationForm = () => {
                 <div className="card">
                     <form
                         name="tramite-licencia"
-                        data-netlify="true"
                     >
-                        <input type="hidden" name="form-name" value="tramite-licencia" />
-
                         <AnimatePresence mode="wait">
                             {/* ... Content of step 1 and 2 remains same, only buttons change below ... */}
                             {step === 1 && (
