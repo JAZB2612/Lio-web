@@ -165,6 +165,14 @@ textarea:focus {
 }
 
 /* Card Styles */
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
