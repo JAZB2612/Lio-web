@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud Recibida - LIO</title>
+    <link rel="stylesheet" href="/src/index.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: var(--bg-subtle);
+            text-align: center;
+        }
+
+        .success-card {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: #dcfce7;
+            color: #16a34a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="success-card">
+        <div class="icon-circle">✓</div>
+        <h1 class="serif" style="font-size: 2rem; margin-bottom: 1rem;">¡Solicitud Enviada!</h1>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+            Hemos recibido tus datos correctamente. Nuestro equipo revisará la información y se pondrá en contacto
+            contigo vía email o WhatsApp en las próximas 24 horas.
+        </p>
+        <a href="/" class="btn btn-primary w-full">Volver al Inicio</a>
+    </div>
+</body>
+
+</html>
