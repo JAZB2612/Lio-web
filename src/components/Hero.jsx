@@ -54,10 +54,6 @@ const Hero = () => {
                 </div>
             </div>
 
-            {/* Subtle background graphic */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] pointer-events-none">
-                <Map size={800} />
-            </div>
         </section>
     );
 };
