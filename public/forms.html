@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Soporte de Formularios - LIO</title>
+</head>
+
+<body>
+    <!-- Este archivo es invisible para el usuario pero permite que Netlify detecte el formulario -->
+    <form name="tramite-licencia" data-netlify="true" hidden>
+        <input type="text" name="nombreCompleto" />
+        <input type="text" name="paisNacimiento" />
+        <input type="text" name="paisResidencia" />
+        <select name="vigencia">
+            <option value="1 year"></option>
+            <option value="2 years"></option>
+            <option value="5 years"></option>
+        </select>
+        <input type="text" name="estatura" />
+        <select name="tipoSangre"></select>
+        <input type="text" name="colorOjos" />
+        <input type="file" name="fotoCarnet" />
+        <input type="file" name="fotoFirma" />
+        <input type="file" name="fotoID" />
+        <input type="file" name="fotoLicencia" />
+        <input type="email" name="email" />
+        <input type="tel" name="telefono" />
+    </form>
+</body>
+
+</html>

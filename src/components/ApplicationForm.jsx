@@ -52,7 +52,7 @@ const ApplicationForm = () => {
                         name="tramite-licencia"
                         method="POST"
                         data-netlify="true"
-                        action="/success"
+                        action="/success.html"
                         encType="multipart/form-data"
                     >
                         <input type="hidden" name="form-name" value="tramite-licencia" />
