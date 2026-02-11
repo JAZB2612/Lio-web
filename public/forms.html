@@ -8,9 +8,10 @@
 
 <body>
     <!-- Este archivo es invisible para el usuario pero permite que Netlify detecte el formulario -->
-    <!-- Es crucial que este archivo esté en la carpeta public y que los nombres de los campos coincidan -->
-    <form name="tramite-licencia" data-netlify="true" enctype="multipart/form-data" hidden>
+    <form name="tramite-licencia" action="/success.html" data-netlify="true" data-netlify-honeypot="bot-field"
+        enctype="multipart/form-data" hidden>
         <input type="hidden" name="form-name" value="tramite-licencia" />
+        <input type="text" name="bot-field" />
 
         <!-- Paso 1 -->
         <input type="text" name="nombreCompleto" />

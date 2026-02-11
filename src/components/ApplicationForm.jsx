@@ -91,6 +91,7 @@ const ApplicationForm = () => {
         // Construimos el FormData manualmente para asegurar que todo esté incluido
         const formDataObj = new FormData();
         formDataObj.append('form-name', 'tramite-licencia');
+        formDataObj.append('bot-field', ''); // Campo honeypot vacío
 
         // Datos de texto
         Object.keys(formData).forEach(key => {
