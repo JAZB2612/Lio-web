@@ -22,7 +22,7 @@ const SearchLicense = () => {
             const response = await fetch(CSV_URL);
             const csvText = await response.text();
 
-            // Parsear CSV (Estructura esperada: Col A: Doc, Col B: ID_Tramite, Col C: Nombre, Col D: Vencimiento, Col E: Estado, Col F: Tipo)
+            // Parsear CSV (Col A: Doc, Col B: ID_Tramite, Col C: Nombre, Col D: Vencimiento, Col E: Estado, Col F: Tipo, Col G: Link)
             const rows = csvText.split('\n').map(row => row.split(','));
 
             // Buscamos coincidencia en la columna A (Doc) O en la columna B (ID Trámite)
@@ -39,6 +39,7 @@ const SearchLicense = () => {
                     validoHasta: foundRow[3],
                     estado: foundRow[4],
                     tipo: foundRow[5],
+                    downloadUrl: foundRow[6] ? foundRow[6].trim() : null,
                 });
                 setStatus('found');
             } else {
@@ -110,9 +111,20 @@ const SearchLicense = () => {
                                     </div>
                                 </div>
 
-                                <button className="btn btn-outline w-full mt-6 gap-2">
-                                    <Download size={20} /> Descargar Certificado Digital
-                                </button>
+                                {result.downloadUrl ? (
+                                    <a
+                                        href={result.downloadUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn btn-outline w-full mt-6 gap-2"
+                                    >
+                                        <Download size={20} /> Descargar Certificado Digital
+                                    </a>
+                                ) : (
+                                    <button className="btn btn-outline w-full mt-6 gap-2" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+                                        <Download size={20} /> Certificado no disponible
+                                    </button>
+                                )}
                             </motion.div>
                         )}
 
