@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
     return (
-        <section className="relative overflow-hidden" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', paddingTop: '100px', background: 'linear-gradient(135deg, #0a1128 0%, #1c2541 100%)' }}>
+        <section className="relative overflow-hidden" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', paddingTop: '100px', background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}>
             {/* Decorative background elements */}
-            <div className="absolute top-0 right-0 w-1/2 h-full opacity-10" style={{ background: 'radial-gradient(circle, #c5a059 0%, transparent 70%)', transform: 'translate(20%, -20%)' }}></div>
+            <div className="absolute top-0 right-0 w-1/2 h-full opacity-10" style={{ background: 'radial-gradient(circle, #3b82f6 0%, transparent 70%)', transform: 'translate(20%, -20%)' }}></div>
             <div className="absolute bottom-0 left-0 w-1/3 h-1/2 opacity-5" style={{ background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)', transform: 'translate(-20%, 20%)' }}></div>
 
             <div className="container relative z-10 grid grid-cols-1 md-grid grid-cols-2 items-center gap-8">

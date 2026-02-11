@@ -20,7 +20,7 @@ const AdminPanel = () => {
 
     if (!isLoggedIn) {
         return (
-            <section id="admin" style={{ background: '#f0f2f5', minHeight: '60vh', display: 'flex', alignItems: 'center' }}>
+            <section id="admin" style={{ background: 'var(--bg-subtle)', minHeight: '60vh', display: 'flex', alignItems: 'center' }}>
                 <div className="container" style={{ maxWidth: '400px' }}>
                     <div className="card text-center">
                         <div className="w-16 h-16 bg-bg-subtle rounded-full flex items-center justify-center mx-auto mb-6">
@@ -48,7 +48,7 @@ const AdminPanel = () => {
     }
 
     return (
-        <section style={{ background: '#f0f2f5', minHeight: '100vh' }}>
+        <section style={{ background: 'var(--bg-subtle)', minHeight: '100vh' }}>
             <div className="container">
                 <div className="flex justify-between items-center mb-8">
                     <div className="flex items-center gap-3">

@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 
 :root {
-  --primary: #c5a059;
-  --primary-hover: #b38f4d;
-  --secondary: #0a1128;
-  --accent: #3a506b;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --secondary: #1e293b;
+  --accent: #64748b;
   --bg-light: #ffffff;
-  --bg-subtle: #f8f9fa;
-  --bg-dark: #0a1128;
-  --text-main: #1c2541;
+  --bg-subtle: #f8fafc;
+  --bg-dark: #0f172a;
+  --text-main: #334155;
   --text-muted: #64748b;
   --white: #ffffff;
   --radius: 12px;
@@ -64,9 +64,9 @@ section {
 }
 
 .glass-dark {
-  background: rgba(10, 17, 40, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -89,13 +89,25 @@ section {
 .btn-primary {
   background: var(--primary);
   color: white;
-  box-shadow: 0 4px 14px 0 rgba(197, 160, 89, 0.39);
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.45);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+}
+
+.nav-link {
+  color: var(--secondary);
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--primary) !important;
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
 }
 
 .btn-secondary {
@@ -104,8 +116,9 @@ section {
 }
 
 .btn-secondary:hover {
-  background: #141e3c;
+  background: #334155;
   transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 .btn-outline {
@@ -148,7 +161,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 /* Card Styles */

@@ -34,7 +34,7 @@ const Navbar = () => {
                         <a
                             key={link.name}
                             href={link.href}
-                            className="font-medium hover:text-primary transition-all text-secondary"
+                            className="nav-link font-medium hover:text-primary transition-all text-secondary"
                         >
                             {link.name}
                         </a>
