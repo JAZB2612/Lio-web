@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, User, Camera, Mail, Phone, CreditCard } from 'lucide-react';
+import { FileText, User, Camera, Mail, Phone, CreditCard, Globe } from 'lucide-react';
 
 const Requirements = () => {
     const reqs = [
