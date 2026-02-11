@@ -55,7 +55,8 @@ const ApplicationForm = () => {
                             const myForm = e.target;
                             const formDataObj = new FormData(myForm);
 
-                            // Añadimos manualmente los campos de pasados pasos que puedan estar desmontados
+                            // Aseguramos que los datos de pasos anteriores (que estén en el estado) se incluyan
+                            // si no están presentes en el DOM del formulario actual
                             Object.keys(formData).forEach(key => {
                                 if (!formDataObj.has(key)) {
                                     formDataObj.append(key, formData[key]);
@@ -64,11 +65,16 @@ const ApplicationForm = () => {
 
                             fetch("/", {
                                 method: "POST",
-                                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                                body: new URLSearchParams(formDataObj).toString(),
+                                body: formDataObj,
                             })
                                 .then(() => window.location.href = "/success.html")
-                                .catch((error) => alert(error));
+                                .catch((error) => alert("Error al enviar: " + error));
+                        }}
+                        onKeyDown={(e) => {
+                            // Evitar que el formulario se envíe al presionar Enter en los inputs
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                            }
                         }}
                         data-netlify="true"
                     >
