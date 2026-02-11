@@ -1,10 +1,10 @@
 import React from 'react';
-import { FileText, User, Camera, Mail, Phone, CreditCard, Globe } from 'lucide-react';
+import { FileText, User, Camera, Mail, Phone, CreditCard, Map } from 'lucide-react';
 
 const Requirements = () => {
     const reqs = [
         { icon: <User size={24} />, title: 'Datos Personales', desc: 'Nombre completo, fecha de nacimiento, estatura, tipo de sangre y color de ojos.' },
-        { icon: <Globe size={24} />, title: 'Residencia', desc: 'País de nacimiento y país de residencia actual.' },
+        { icon: <Map size={24} />, title: 'Residencia', desc: 'País de nacimiento y país de residencia actual.' },
         { icon: <FileText size={24} />, title: 'Documentación', desc: 'Pasaporte o Cédula de identidad vigente.' },
         { icon: <CreditCard size={24} />, title: 'Licencia Local', desc: 'Foto de tu licencia de conducir vigente de tu país.' },
         { icon: <Camera size={24} />, title: 'Fotografías', desc: 'Foto tipo carnet y foto de tu firma en fondo blanco.' },

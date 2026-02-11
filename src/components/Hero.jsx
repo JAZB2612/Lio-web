@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Globe, Clock, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Map, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -64,7 +64,7 @@ const Hero = () => {
                                     <span className="text-primary text-xs font-bold tracking-widest uppercase">International</span>
                                     <span className="text-white text-lg font-bold serif">Driving License</span>
                                 </div>
-                                <Globe className="text-white opacity-30" size={40} />
+                                <Map className="text-white opacity-30" size={40} />
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
