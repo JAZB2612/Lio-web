@@ -2,6 +2,7 @@
   command = "npm run build"
   publish = "dist"
 
-[functions]
-  node_bundle = true
-  directory = "netlify/functions"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
