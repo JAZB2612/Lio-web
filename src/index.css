@@ -5,8 +5,8 @@
   --primary-hover: #2563eb;
   --secondary: #1e293b;
   --accent: #64748b;
-  --bg-light: #ffffff;
-  --bg-subtle: #f8fafc;
+  --bg-light: #f1f5f9;
+  --bg-subtle: #e2e8f0;
   --bg-dark: #0f172a;
   --text-main: #334155;
   --text-muted: #64748b;
@@ -165,17 +165,21 @@ textarea:focus {
 }
 
 /* Card Styles */
-.card {
-  background: white;
-  border-radius: var(--radius);
-  padding: 2rem;
-  box-shadow: var(--shadow);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+  border-color: var(--primary);
+}
+
+.pricing-card {
+  border: 2px solid transparent;
   transition: var(--transition);
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+.pricing-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-10px);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
 }
 
 /* Tabs/Steps indicator */

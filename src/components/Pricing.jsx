@@ -45,7 +45,7 @@ const Pricing = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className={`card relative flex flex-col ${plan.recommended ? 'scale-105 border-2 border-primary' : ''}`}
+                            className={`card pricing-card relative flex flex-col ${plan.recommended ? 'scale-105 border-2 border-primary' : ''}`}
                             style={plan.recommended ? { position: 'relative', zIndex: 1, transform: 'scale(1.05)' } : {}}
                         >
                             {plan.recommended && (
